@@ -1,5 +1,5 @@
 # Project exclude paths
 /target/
 DiscordBot.iml
-pom.xml
 .gitignore
+.idea/
