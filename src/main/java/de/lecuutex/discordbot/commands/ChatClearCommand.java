@@ -22,7 +22,6 @@ public class ChatClearCommand extends DefaultCommand {
         TextChannel channel = event.getTextChannel();
 
         int amount = Math.min(Math.toIntExact(event.getOption("amount").getAsLong()), 100);
-
         List<Message> messageList = event.getTextChannel().getHistory().retrievePast(amount).complete();
 
         if (messageList.size() < 2) {

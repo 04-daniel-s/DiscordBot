@@ -71,12 +71,13 @@ public class MySQL {
             preparedStatement.setString(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 message = rs.getString("message");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return message;
     }
 

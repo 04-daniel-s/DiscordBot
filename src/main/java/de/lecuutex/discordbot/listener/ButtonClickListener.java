@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Component;
 
+import java.awt.*;
 import java.io.UTFDataFormatException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +27,23 @@ public class ButtonClickListener extends ListenerAdapter {
         MessageEmbed messageEmbed = event.getTextChannel().retrieveMessageById(event.getMessageId()).complete().getEmbeds().get(0);
 
         if (event.getComponentId().equals("punish")) {
-            Member member = guild.getMembers().stream().filter(m -> m.getUser().getAsTag().equals(getUserTag(messageEmbed))).findAny().get();
+            Member member = guild.getMembers().stream().filter(m -> m.getUser().getAsTag().equals(getUserTag(messageEmbed))).findAny().orElseThrow();
             Role muteRole = guild.getRoleById(Utils.muteRoleID);
 
             if (!member.getRoles().contains(muteRole)) guild.addRoleToMember(member, muteRole).queue();
-            event.getTextChannel().editMessageEmbedsById(event.getMessageId(), new Embed("test", "test", 22, 43, 95).build()).complete();
-            event.replyEmbeds(new Embed("test", "test", 1, 1, 1).build()).setEphemeral(true).complete();
+            event.getTextChannel().editMessageEmbedsById(event.getMessageId(), new Embed(messageEmbed.getTitle(),
+                    messageEmbed.getDescription(), Color.decode("#b71540")).setAuthor("Punished!")
+                    .addFields(messageEmbed.getFields())
+                    .setThumbnail(member.getUser().getAvatarUrl()).build()).setActionRows().complete();
+
+            event.reply("").complete().setEphemeral(true).deleteOriginal().queue();
         }
     }
 
     public String getUserTag(MessageEmbed messageEmbed) {
         for (String string : messageEmbed.getDescription().split("\n")) {
             if (!string.contains("Nutzer")) continue;
-            return string.split(" ")[string.split(" ").length - 1].trim();
+            return string.split(" ")[string.split(" ").length - 1].trim().replace("`", "");
         }
         return "";
     }

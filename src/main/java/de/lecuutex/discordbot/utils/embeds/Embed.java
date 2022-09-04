@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.awt.*;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * A class created by yi.dnl - 03.02.2022 / 00:37
@@ -27,6 +28,7 @@ public class Embed {
         builder.setDescription(text);
         builder.setTimestamp(Instant.now());
     }
+
     public Embed(String title, String text, int r, int g, int b) {
         builder.setTitle(title);
         builder.setColor(new Color(r, g, b));
@@ -61,12 +63,19 @@ public class Embed {
     }
 
     public Embed addSpacer() {
-        addSpacer(false);
+        addSpacer(true);
         return this;
     }
 
     public Embed addField(String name, String value, boolean inline) {
         builder.addField(new MessageEmbed.Field(name, value, inline));
+        return this;
+    }
+
+    public Embed addFields(List<MessageEmbed.Field> fields) {
+        for (MessageEmbed.Field field : fields) {
+            builder.addField(field);
+        }
         return this;
     }
 
@@ -83,8 +92,8 @@ public class Embed {
         return channel.sendMessage(build()).complete();
     }
 
-    public Message send(TextChannel channel,String id, String text) {
-        return channel.sendMessage(build()).setActionRow(net.dv8tion.jda.api.interactions.components.Button.success(id,text)).complete();
+    public Message send(TextChannel channel, String id, String text) {
+        return channel.sendMessage(build()).setActionRow(net.dv8tion.jda.api.interactions.components.Button.danger(id, text)).complete();
     }
 
     public static void delete(Message message, int time) {

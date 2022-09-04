@@ -1,5 +1,6 @@
 package de.lecuutex.discordbot.listener;
 
+import com.mysql.cj.protocol.a.MysqlBinaryValueDecoder;
 import de.lecuutex.discordbot.utils.MySQL;
 import de.lecuutex.discordbot.utils.Utils;
 import de.lecuutex.discordbot.utils.embeds.Embed;
@@ -19,14 +20,13 @@ public class MessageUpdateListener extends ListenerAdapter {
     @Override
     public void onMessageUpdate(MessageUpdateEvent event) {
         Message message = event.getMessage();
-
         if (message.getAuthor().getAsTag().equals("Elefant#7353")) return;
 
         new Embed("📬 Änderung",
-                Utils.PREFIX + "Nutzer: " + message.getAuthor().getAsTag() + " *(" + message.getAuthor().getAsMention() + ")*" + "\n\n"
-                        + Utils.PREFIX + "Vorher:\n" + MySQL.getMessage(message.getId()) + "\n\n"
-                        + Utils.PREFIX + "Nachher:\n" + message.getContentRaw(),
-                Color.decode("#b71540")).setThumbnail(message.getAuthor().getAvatarUrl()).send(Utils.TEST_CHANNEL,"punish", "🔴 Punish!");
+                Utils.PREFIX + "Nutzer: " + message.getAuthor().getAsTag() + "\n\n", Color.decode("#b71540"))
+                .addField("Vorher", MySQL.getMessage(message.getId()) + "\n\n")
+                .addField("Nachher", message.getContentRaw())
+                .setThumbnail(message.getAuthor().getAvatarUrl()).send(Utils.TEST_CHANNEL, "punish", "🔴 Punish!");
         MySQL.storeMessage(message);
     }
 }
