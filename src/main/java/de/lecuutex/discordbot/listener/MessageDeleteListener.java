@@ -25,8 +25,8 @@ public class MessageDeleteListener extends ListenerAdapter {
         if (author.equals("error") || author.equals("Elefant#7353")) return;
 
         new Embed("📬 Gelöschte Nachricht",
-                Utils.PREFIX + "Nutzer: " + author + "\n\n" + Utils.PREFIX + "Nachricht:\n" +
-                        message, Color.decode("#b71540")).setThumbnail(url).send(Utils.TEST_CHANNEL, "punish", "🔴 Punish!");
+                Utils.PREFIX + "Nutzer: " + author + "\n" + Utils.PREFIX + "Nachricht:\n\n´" +
+                        message + "´", Color.decode("#b71540")).setThumbnail(url).send(Utils.TEST_CHANNEL, "punish", "🔴 Punish!");
         MySQL.deleteMessage(id);
     }
 }

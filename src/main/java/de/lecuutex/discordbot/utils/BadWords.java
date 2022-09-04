@@ -15,8 +15,6 @@ public enum BadWords {
     MISSGEBURT("missgeburt", 10),
     DUMM("dumm", 3),
     WICHSER("wichser", 10),
-    N1("sallai",50),
-    N2("bowker",50),
     HURE(" hure", 10),
     NUTTE("nutte", 10),
     FICK("fick", 10),

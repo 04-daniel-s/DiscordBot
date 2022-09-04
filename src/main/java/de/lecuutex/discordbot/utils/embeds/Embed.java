@@ -27,7 +27,6 @@ public class Embed {
         builder.setDescription(text);
         builder.setTimestamp(Instant.now());
     }
-
     public Embed(String title, String text, int r, int g, int b) {
         builder.setTitle(title);
         builder.setColor(new Color(r, g, b));

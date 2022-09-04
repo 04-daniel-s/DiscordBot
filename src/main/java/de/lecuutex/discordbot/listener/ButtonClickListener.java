@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Component;
 
+import java.io.UTFDataFormatException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,23 +24,22 @@ public class ButtonClickListener extends ListenerAdapter {
         guild.loadMembers();
 
         MessageEmbed messageEmbed = event.getTextChannel().retrieveMessageById(event.getMessageId()).complete().getEmbeds().get(0);
-        String userTag = "";
-
-        for (String string : messageEmbed.getDescription().split("\n")) {
-            if (!string.contains("Nutzer")) continue;
-            userTag = string.split(" ")[string.split(" ").length - 1].trim();
-        }
 
         if (event.getComponentId().equals("punish")) {
-            String finalUserTag = userTag;
-
-            Member member = guild.getMembers().stream().filter(m -> m.getUser().getAsTag().equals(finalUserTag)).findAny().get();
+            Member member = guild.getMembers().stream().filter(m -> m.getUser().getAsTag().equals(getUserTag(messageEmbed))).findAny().get();
             Role muteRole = guild.getRoleById(Utils.muteRoleID);
 
             if (!member.getRoles().contains(muteRole)) guild.addRoleToMember(member, muteRole).queue();
-            event.reply("").complete().deleteOriginal().queue();
-
-            event.getTextChannel().editMessageEmbedsById(event.getMessageId(), new Embed("test", "test", 22, 43, 95).build());
+            event.getTextChannel().editMessageEmbedsById(event.getMessageId(), new Embed("test", "test", 22, 43, 95).build()).complete();
+            event.replyEmbeds(new Embed("test", "test", 1, 1, 1).build()).setEphemeral(true).complete();
         }
+    }
+
+    public String getUserTag(MessageEmbed messageEmbed) {
+        for (String string : messageEmbed.getDescription().split("\n")) {
+            if (!string.contains("Nutzer")) continue;
+            return string.split(" ")[string.split(" ").length - 1].trim();
+        }
+        return "";
     }
 }

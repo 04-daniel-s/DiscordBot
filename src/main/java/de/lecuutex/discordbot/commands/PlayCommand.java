@@ -8,10 +8,8 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
  */
 
 public class PlayCommand extends DefaultCommand {
-
     @Override
     public void execute(SlashCommandEvent event) {
-
     }
 
     @Override
