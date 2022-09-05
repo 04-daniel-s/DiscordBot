@@ -17,6 +17,8 @@ public class MessageDeleteListener extends ListenerAdapter {
 
     @Override
     public void onMessageDelete(MessageDeleteEvent event) {
+        if(event.getTextChannel().getId().equals("940634940591202314")) return;
+
         String id = event.getMessageId();
         String author = MySQL.getAuthor(id);
         String message = MySQL.getMessage(id);
