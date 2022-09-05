@@ -36,19 +36,19 @@ public class TrackScheduler extends AudioEventAdapter {
     @Override
     public void onTrackStart(AudioPlayer player, AudioTrack track) {
         player.playTrack(track);
-        queue.remove(track.getIdentifier());
+        //queue.remove(track.getIdentifier());
         new Embed("Test", "Start", 0, 0, 0).send(Utils.LOG_CHANNEL);
     }
 
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
-        if (queue.size() == 0) {
+        /*if (queue.size() == 0) {
             AudioManager audioManager = guild.getAudioManager();
             audioManager.closeAudioConnection();
             return;
         }
-
-        audioPlayerManager.loadItem(queue.get(0), new AudioResultHandler(player));
+        */
+        audioPlayerManager.loadItem(queue.get(0), audioResultHandler);
         // new Embed("Test", "End", 0, 0, 0).send(Utils.LOG_CHANNEL);
     }
 

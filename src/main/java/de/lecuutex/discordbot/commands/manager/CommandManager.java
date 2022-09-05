@@ -5,8 +5,6 @@ import de.lecuutex.discordbot.commands.MoveCommand;
 import de.lecuutex.discordbot.commands.PlayCommand;
 import de.lecuutex.discordbot.commands.RankCommand;
 import de.lecuutex.discordbot.utils.Errors;
-import de.lecuutex.discordbot.utils.Utils;
-import de.lecuutex.discordbot.utils.embeds.Embed;
 import lombok.Getter;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
@@ -15,7 +13,6 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
-import okhttp3.internal.annotations.EverythingIsNonNull;
 
 import java.util.ArrayList;
 
