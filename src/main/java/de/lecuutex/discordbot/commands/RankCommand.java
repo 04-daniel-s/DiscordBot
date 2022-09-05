@@ -29,7 +29,7 @@ public class RankCommand extends DefaultCommand {
         Member member = event.getOption("user").getAsMember();
         Role role = event.getOption("rank").getAsRole();
 
-        if(role.getName().equals("Zebra")) {
+        if(role.getName().equals("Zebra") && !member.getUser().getAsTag().equals("yi.dnl#3936")) {
             replyError(event,Errors.INSUFFICIENT_PERMISSIONS.getError());
             return;
         }

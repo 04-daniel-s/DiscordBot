@@ -1,7 +1,6 @@
 package de.lecuutex.discordbot;
 
 import de.lecuutex.discordbot.listener.manager.ListenerManager;
-import de.lecuutex.discordbot.utils.Errors;
 import de.lecuutex.discordbot.utils.MySQL;
 import de.lecuutex.discordbot.utils.Utils;
 import lombok.Getter;
@@ -12,7 +11,6 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
@@ -46,7 +44,7 @@ public class DiscordBot {
     private JDA connect() {
         JDA jda = null;
         try {
-            jda = JDABuilder.createDefault(Utils.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS).
+            jda = JDABuilder.createDefault(Utils.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_VOICE_STATES).
                     setMemberCachePolicy(MemberCachePolicy.ALL).
                     setAutoReconnect(true).
                     setStatus(OnlineStatus.ONLINE).build();
@@ -54,12 +52,6 @@ public class DiscordBot {
             jda.awaitReady();
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
-        }
-
-        for (Guild g : jda.getGuilds()) {
-            for (Member member : g.getMembers()) {
-                //TODO das sind nur Member im Voicechannel
-            }
         }
         return jda;
     }
