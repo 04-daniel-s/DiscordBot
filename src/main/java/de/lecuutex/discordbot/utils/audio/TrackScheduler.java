@@ -10,11 +10,11 @@ import net.dv8tion.jda.api.managers.AudioManager;
  * A class created by yi.dnl - 04.09.2022 / 23:02
  */
 
-public class AudioEventAdapter extends com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter {
+public class TrackScheduler extends com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter {
 
-    private Guild guild;
+    private final Guild guild;
 
-    public AudioEventAdapter(Guild guild) {
+    public TrackScheduler(Guild guild) {
         this.guild = guild;
     }
 
