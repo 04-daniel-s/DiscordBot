@@ -36,7 +36,8 @@ public class DiscordBot {
 
     private JDA jda;
 
-    public static BotManager botManager;
+    @Getter
+    private BotManager botManager;
 
     public static void main(String[] args) {
         JDA jda = instance.connect();
@@ -45,7 +46,7 @@ public class DiscordBot {
 
         new MySQL();
         new Embed(":pushpin: **|** Information", Utils.PREFIX + "`Zebra` hat sich erfolgreich hochgefahren!", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
-        botManager = new BotManager();
+        instance.setBotManager(new BotManager());
     }
 
     private JDA connect() {

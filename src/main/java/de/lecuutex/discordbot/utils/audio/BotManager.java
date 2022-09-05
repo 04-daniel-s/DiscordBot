@@ -47,9 +47,9 @@ public class BotManager {
         return musicManager;
     }
 
-    public void loadAndPlay(TextChannel channel, VoiceChannel voiceChannel, String trackUrl) {
+    public void loadAndPlay(TextChannel channel, VoiceChannel voiceChannel, String url) {
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
-        playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
+        playerManager.loadItemOrdered(musicManager, url, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
@@ -71,7 +71,7 @@ public class BotManager {
 
             @Override
             public void noMatches() {
-                channel.sendMessage("Nothing found by " + trackUrl).queue();
+                channel.sendMessage("Nothing found by " + url).queue();
             }
 
             @Override
