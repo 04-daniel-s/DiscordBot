@@ -5,6 +5,8 @@ import de.lecuutex.discordbot.commands.MoveCommand;
 import de.lecuutex.discordbot.commands.PlayCommand;
 import de.lecuutex.discordbot.commands.RankCommand;
 import de.lecuutex.discordbot.utils.Errors;
+import de.lecuutex.discordbot.utils.Utils;
+import de.lecuutex.discordbot.utils.embeds.Embed;
 import lombok.Getter;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
@@ -59,26 +61,30 @@ public class CommandManager extends ListenerAdapter {
 
         commands.addCommands(new CommandData("play", "Spiele Musik ab")
                 .addOption(OptionType.STRING, "link", "Link angeben", true)
-                .addOption(OptionType.CHANNEL,"channel", "Voicechannel angeben", false));
+                .addOption(OptionType.CHANNEL, "channel", "Voicechannel angeben", false));
         commands.queue();
     }
 
     @Override
     public void onSlashCommand(SlashCommandEvent event) {
-        for (DefaultCommand command : listener) {
-            if (!event.getName().equals(command.getCommand())) continue;
-            command.setValues(event);
+        try {
+            for (DefaultCommand command : listener) {
+                if (!event.getName().equals(command.getCommand())) continue;
+                command.setValues(event);
 
-            if (!command.hasPermission(Permission.ADMINISTRATOR) && command.isAdminCommand()) {
-                command.replyError(event, Errors.INSUFFICIENT_PERMISSIONS.getError());
-                continue;
+                if (!command.hasPermission(Permission.ADMINISTRATOR) && command.isAdminCommand()) {
+                    command.replyError(event, Errors.INSUFFICIENT_PERMISSIONS.getError());
+                    continue;
+                }
+
+                command.execute(event);
+
+                if (!command.isReplied()) {
+                    event.reply("").complete().deleteOriginal().queue();
+                }
             }
-
-            command.execute(event);
-
-            if (!command.isReplied()) {
-                event.reply("").complete().deleteOriginal().queue();
-            }
+        } catch (Exception e) {
+            new Embed("Exception", e.getMessage(),0,0,0).send(Utils.LOG_CHANNEL);
         }
     }
 
