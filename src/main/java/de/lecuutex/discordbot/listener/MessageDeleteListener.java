@@ -22,8 +22,6 @@ public class MessageDeleteListener extends ListenerAdapter {
         String message = MySQL.getMessage(id);
         String url = MySQL.getLink(id);
 
-        System.out.println(author);
-        
         if (author.equals("error") || author.equals("Elefant#7353")) return;
 
         new Embed("📬 **|** Gelöschte Nachricht",

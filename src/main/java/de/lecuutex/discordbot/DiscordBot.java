@@ -56,7 +56,7 @@ public class DiscordBot {
             e.printStackTrace();
         }
 
-        new Embed("", ":green_circle: Der Bot startet", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
+        new Embed(":pushpin: **|** Information", ":green_circle: Der Bot startet", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
         return jda;
     }
 
