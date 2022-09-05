@@ -42,8 +42,8 @@ public class PlayCommand extends DefaultCommand {
         player.addListener(trackScheduler);
 
         audioManager.setSendingHandler(new AudioPlayerSendHandler(player));
-        playerManager.loadItem(url, new AudioResultHandler(player));
 
+        playerManager.loadItem(url, new AudioResultHandler(player));
         audioManager.openAudioConnection(voiceChannel);
     }
 

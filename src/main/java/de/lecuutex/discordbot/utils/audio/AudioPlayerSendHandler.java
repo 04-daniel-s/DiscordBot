@@ -11,7 +11,9 @@ import java.nio.ByteBuffer;
  */
 
 public class AudioPlayerSendHandler implements AudioSendHandler {
+
     private final AudioPlayer audioPlayer;
+
     private AudioFrame lastFrame;
 
     public AudioPlayerSendHandler(AudioPlayer audioPlayer) {
