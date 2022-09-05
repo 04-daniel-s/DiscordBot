@@ -39,8 +39,6 @@ public class MessageReceiveListener extends ListenerAdapter {
                 return;
             }
 
-            if (!member.getId().equals(Utils.DANIEL_ID) && !member.getId().equals(Utils.ALEX_ID)) return;
-
             Message messageEmbed = new Embed("⛏ TODO", message.getContentRaw(), Color.decode("#f6b93b")).send(channel);
             messageEmbed.addReaction("✅").queue();
             message.delete().queue();
@@ -51,7 +49,6 @@ public class MessageReceiveListener extends ListenerAdapter {
             event.getMessage().delete().queue();
         }
 
-        //TODO: Store in database
         MySQL.storeMessage(message);
     }
 }
