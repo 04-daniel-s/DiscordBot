@@ -52,13 +52,14 @@ public class CommandManager extends ListenerAdapter {
                                 .addOption(OptionType.ROLE, "rank", "Rang angeben", true)
                 ));
 
-        commands.addCommands(new CommandData("move", "Ziehe einen User in deinen VoiceChannel")
+        commands.addCommands(new CommandData("move", "Ziehe einen User in einen VoiceChannel")
                 .addOption(OptionType.USER, "user", "Nutzer angeben", true)
                 .addOption(OptionType.CHANNEL, "channel", "VoiceChannel angeben", false));
 
-        commands.addCommands(new CommandData("play", "Spiele Musik ab")
-        .addOption(OptionType.STRING, "link", "Gib einen Link an", true));
 
+        commands.addCommands(new CommandData("play", "Spiele Musik ab")
+                .addOption(OptionType.STRING, "link", "Link angeben", true)
+                .addOption(OptionType.CHANNEL,"channel", "Voicechannel angeben", false));
         commands.queue();
     }
 

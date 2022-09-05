@@ -20,10 +20,13 @@ public class PlayCommand extends DefaultCommand {
     @Override
     public void execute(SlashCommandEvent event) {
         String url = event.getOption("link").getAsString();
+        VoiceChannel voiceChannel = getMember().getVoiceState().getChannel();
 
-        VoiceChannel myChannel = getGuild().getVoiceChannelById("866371066838777866");
+        if (event.getOption("channel") != null && event.getOption("channel").getAsGuildChannel() instanceof VoiceChannel) {
+            voiceChannel = (VoiceChannel) event.getOption("channel").getAsGuildChannel();
+        }
+
         AudioManager audioManager = getGuild().getAudioManager();
-
         AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
         AudioSourceManagers.registerRemoteSources(playerManager);
 
@@ -35,7 +38,7 @@ public class PlayCommand extends DefaultCommand {
         playerManager.loadItem(url, new AudioResultHandler(player));
         audioManager.setSendingHandler(handler);
 
-        audioManager.openAudioConnection(myChannel);
+        audioManager.openAudioConnection(voiceChannel);
     }
 
     @Override
