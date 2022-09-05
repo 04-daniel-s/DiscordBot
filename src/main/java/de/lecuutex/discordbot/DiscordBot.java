@@ -41,7 +41,7 @@ public class DiscordBot {
         instance.setJda(jda);
 
         new MySQL();
-        new Embed(":pushpin: **|** Information", ":green_circle: Der Bot startet", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
+        new Embed(":pushpin: **|** Information", Utils.PREFIX + ":green_circle: Der Bot hat sich erfolgreich hochgefahren!", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
     }
 
     private JDA connect() {
