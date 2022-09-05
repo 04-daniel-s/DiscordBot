@@ -19,7 +19,7 @@ public class UserLeaveListener extends ListenerAdapter {
     @Override
     public void onGuildMemberRemove(GuildMemberRemoveEvent event) {
         if (event.getUser().isBot()) return;
-        Utils.sendLogEmbed(new Embed(":bust_in_silhouette: Mitglied verlassen",
+        Utils.sendLogEmbed(new Embed(":bust_in_silhouette: **|** Mitglied verlassen",
                 Utils.PREFIX + "Name:" + event.getMember().getAsMention() + " **-** " + event.getMember().getId() + "\n" +
                         Utils.PREFIX + "Erstellt: " + event.getMember().getUser().getTimeCreated().format(DateTimeFormatter.ofPattern("dd.MM.yy, hh:mm")) + "\n" +
                         Utils.PREFIX + "Beigetreten: " + new SimpleDateFormat().format(new Date(event.getMember().getTimeJoined().toEpochSecond() / 1000)) + "\n" +

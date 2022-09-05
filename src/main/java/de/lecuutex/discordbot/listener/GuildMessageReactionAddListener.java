@@ -36,8 +36,9 @@ public class GuildMessageReactionAddListener extends ListenerAdapter {
                 }
 
                 event.getGuild().getTextChannelById("947588938284027914").sendMessage(new Embed("⛏ **|** History",
-                        Utils.PREFIX + "Datum: " + new SimpleDateFormat().format(new Date(botMessage.getTimeCreated().toInstant().getEpochSecond() * 1000)) + "\n"
-                                + Utils.PREFIX + "Inhalt: \n\n" + content,
+                        Utils.PREFIX + "Datum: "
+                                + new SimpleDateFormat().format(new Date(botMessage.getTimeCreated().toInstant().getEpochSecond() * 1000))
+                                + "\n\n" + content,
                         Color.decode("#6c63cd")).build()).queue();
 
                 botMessage.delete().queue();

@@ -9,9 +9,11 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import de.lecuutex.discordbot.commands.manager.DefaultCommand;
+import de.lecuutex.discordbot.utils.Utils;
 import de.lecuutex.discordbot.utils.audio.AudioPlayerSendHandler;
 import de.lecuutex.discordbot.utils.audio.AudioResultHandler;
 import de.lecuutex.discordbot.utils.audio.TrackScheduler;
+import de.lecuutex.discordbot.utils.embeds.Embed;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
@@ -32,7 +34,7 @@ public class PlayCommand extends DefaultCommand {
         }
 
         if (voiceChannel == null) return;
-
+        new Embed("test", url, 0, 0, 0).send(Utils.LOG_CHANNEL);
         AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
         AudioSourceManagers.registerRemoteSources(playerManager);
         AudioPlayer player = playerManager.createPlayer();

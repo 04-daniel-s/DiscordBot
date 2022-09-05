@@ -20,7 +20,7 @@ public class UserJoinListener extends ListenerAdapter {
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-        Utils.sendLogEmbed(new Embed(":busts_in_silhouette: Mitglied beigetreten",
+        Utils.sendLogEmbed(new Embed(":busts_in_silhouette: **|** Mitglied beigetreten",
                 Utils.PREFIX + "Name:" + event.getMember().getAsMention() + " **-** " + event.getMember().getId() + "\n" +
                         Utils.PREFIX + "Erstellt: " + event.getMember().getUser().getTimeCreated().format(DateTimeFormatter.ofPattern("dd.MM.yy, hh:mm")) + "\n" +
                         Utils.PREFIX + "Beigetreten: " + new SimpleDateFormat().format(new Date(Instant.now().toEpochMilli())), 243, 156, 18)
