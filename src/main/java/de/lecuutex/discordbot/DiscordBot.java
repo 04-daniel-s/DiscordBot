@@ -3,6 +3,7 @@ package de.lecuutex.discordbot;
 import de.lecuutex.discordbot.listener.manager.ListenerManager;
 import de.lecuutex.discordbot.utils.MySQL;
 import de.lecuutex.discordbot.utils.Utils;
+import de.lecuutex.discordbot.utils.audio.BotManager;
 import de.lecuutex.discordbot.utils.embeds.Embed;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +36,8 @@ public class DiscordBot {
 
     private JDA jda;
 
+    public static BotManager botManager;
+
     public static void main(String[] args) {
         JDA jda = instance.connect();
         instance.changeActivity(jda);
@@ -42,12 +45,14 @@ public class DiscordBot {
 
         new MySQL();
         new Embed(":pushpin: **|** Information", Utils.PREFIX + "`Zebra` hat sich erfolgreich hochgefahren!", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
+        botManager = new BotManager();
     }
 
     private JDA connect() {
         JDA jda = null;
         try {
-            jda = JDABuilder.createDefault(Utils.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_VOICE_STATES).
+            jda = JDABuilder.createDefault(Utils.TOKEN, GatewayIntent.GUILD_MESSAGES,
+                            GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_VOICE_STATES).
                     setMemberCachePolicy(MemberCachePolicy.ALL).
                     setAutoReconnect(true).
                     setStatus(OnlineStatus.ONLINE).build();

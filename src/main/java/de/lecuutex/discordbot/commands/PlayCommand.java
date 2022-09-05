@@ -1,19 +1,15 @@
 package de.lecuutex.discordbot.commands;
 
-import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
-import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
-import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import de.lecuutex.discordbot.DiscordBot;
 import de.lecuutex.discordbot.commands.manager.DefaultCommand;
 import de.lecuutex.discordbot.utils.Utils;
 import de.lecuutex.discordbot.utils.audio.AudioPlayerSendHandler;
 import de.lecuutex.discordbot.utils.audio.AudioResultHandler;
 import de.lecuutex.discordbot.utils.audio.TrackScheduler;
-import de.lecuutex.discordbot.utils.embeds.Embed;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
@@ -34,19 +30,8 @@ public class PlayCommand extends DefaultCommand {
         }
 
         if (voiceChannel == null) return;
-        AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
-        AudioSourceManagers.registerRemoteSources(playerManager);
-        AudioPlayer player = playerManager.createPlayer();
 
-        TrackScheduler trackScheduler = new TrackScheduler();
-        player.addListener(trackScheduler);
-
-        playerManager.loadItem(url, new AudioResultHandler(player));
-
-        AudioManager audioManager = getGuild().getAudioManager();
-        audioManager.setSendingHandler(new AudioPlayerSendHandler(player));
-
-        audioManager.openAudioConnection(voiceChannel);
+        DiscordBot.botManager.loadAndPlay(Utils.LOG_CHANNEL,url);
     }
 
     @Override
