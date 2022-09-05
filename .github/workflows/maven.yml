@@ -28,7 +28,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: target
-        remote: scp/home/discord
+        remote: ../home/discord
         rmRemote: true
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
