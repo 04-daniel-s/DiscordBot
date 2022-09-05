@@ -1,17 +1,13 @@
 package de.lecuutex.discordbot.commands;
 
-import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
-import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
-import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import de.lecuutex.discordbot.commands.manager.DefaultCommand;
+import de.lecuutex.discordbot.utils.audio.AudioPlayerSendHandler;
 import de.lecuutex.discordbot.utils.audio.AudioResultHandler;
 import de.lecuutex.discordbot.utils.audio.TrackScheduler;
-import de.lecuutex.discordbot.utils.audio.AudioPlayerSendHandler;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
