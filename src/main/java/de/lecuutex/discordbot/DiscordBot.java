@@ -53,7 +53,8 @@ public class DiscordBot {
         JDA jda = null;
         try {
             jda = JDABuilder.createDefault(Utils.TOKEN, GatewayIntent.GUILD_MESSAGES,
-                            GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_VOICE_STATES).
+                            GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS,
+                            GatewayIntent.GUILD_VOICE_STATES, GatewayIntent.GUILD_EMOJIS).
                     setMemberCachePolicy(MemberCachePolicy.ALL).
                     setAutoReconnect(true).
                     setStatus(OnlineStatus.ONLINE).build();

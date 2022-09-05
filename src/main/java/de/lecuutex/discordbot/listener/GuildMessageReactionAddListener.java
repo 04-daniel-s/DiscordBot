@@ -33,11 +33,7 @@ public class GuildMessageReactionAddListener extends ListenerAdapter {
             } else if (event.getReactionEmote().getName().equals("✅") && user.getId().equals(Utils.DANIEL_ID)) {
                 System.out.println(4);
                 Message botMessage = event.getReaction().getTextChannel().retrieveMessageById(event.getMessageId()).complete();
-                String content = "";
-
-                for (MessageEmbed embed : botMessage.getEmbeds()) {
-                    content = embed.getDescription();
-                }
+                String content = botMessage.getEmbeds().get(0).getDescription();
 
                 new Embed("⛏ **|** History", Utils.PREFIX + "Datum: "
                         + new SimpleDateFormat().format(new Date(botMessage.getTimeCreated().toInstant().getEpochSecond() * 1000))
