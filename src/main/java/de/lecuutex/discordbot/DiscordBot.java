@@ -41,6 +41,7 @@ public class DiscordBot {
         instance.setJda(jda);
 
         new MySQL();
+        new Embed(":pushpin: **|** Information", ":green_circle: Der Bot startet", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
     }
 
     private JDA connect() {
@@ -56,14 +57,13 @@ public class DiscordBot {
             e.printStackTrace();
         }
 
-        new Embed(":pushpin: **|** Information", ":green_circle: Der Bot startet", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
         return jda;
     }
 
     public void changeActivity(JDA jda) {
         String[] strings = new String[]{"In progress...", "5%"};
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        Runnable runnable = () -> jda.getPresence().setActivity(Activity.playing(strings[new Random().nextInt(strings.length + 1)]));
+        Runnable runnable = () -> jda.getPresence().setActivity(Activity.playing(strings[new Random().nextInt(strings.length - 1)]));
         scheduler.scheduleAtFixedRate(runnable, 0, 60, TimeUnit.SECONDS);
     }
 
