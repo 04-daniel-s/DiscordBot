@@ -34,7 +34,6 @@ public class PlayCommand extends DefaultCommand {
         }
 
         if (voiceChannel == null) return;
-        new Embed("test", url, 0, 0, 0).send(Utils.LOG_CHANNEL);
         AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
         AudioSourceManagers.registerRemoteSources(playerManager);
         AudioPlayer player = playerManager.createPlayer();
