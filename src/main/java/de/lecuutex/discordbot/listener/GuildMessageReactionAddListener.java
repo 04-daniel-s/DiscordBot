@@ -29,6 +29,7 @@ public class GuildMessageReactionAddListener extends ListenerAdapter {
             if (!user.getId().equals(Utils.DANIEL_ID) && !user.isBot()) {
                 event.getReaction().removeReaction().queue();
             } else if (event.getReactionEmote().getName().equals("✅") && user.getId().equals(Utils.DANIEL_ID)) {
+                System.out.println("test");
                 Message botMessage = event.getReaction().getTextChannel().retrieveMessageById(event.getMessageId()).complete();
                 String content = "";
 
