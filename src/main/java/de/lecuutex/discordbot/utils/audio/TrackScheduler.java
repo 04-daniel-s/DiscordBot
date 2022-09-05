@@ -46,7 +46,7 @@ public class TrackScheduler extends AudioEventAdapter {
         }
 
         audioPlayerManager.loadItem(queue.get(0), new AudioResultHandler(player));
-        new Embed("Test", "End", 0, 0, 0).send(Utils.LOG_CHANNEL);
+       // new Embed("Test", "End", 0, 0, 0).send(Utils.LOG_CHANNEL);
     }
 
     public void queue(String url) {
