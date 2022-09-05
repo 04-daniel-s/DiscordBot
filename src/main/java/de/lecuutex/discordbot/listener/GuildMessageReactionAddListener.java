@@ -23,10 +23,8 @@ public class GuildMessageReactionAddListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
         if (event.getChannel().getId().equals("940634940591202314")) {
-
             if (!event.getUser().getId().equals(Utils.DANIEL_ID) && !event.getUser().isBot()) {
                 event.getReaction().removeReaction().queue();
-
             } else if (event.getReactionEmote().getName().equals("✅") && event.getUser().getId().equals(Utils.DANIEL_ID)) {
                 Message botMessage = event.getReaction().getTextChannel().retrieveMessageById(event.getMessageId()).complete();
                 String content = "";
@@ -35,11 +33,10 @@ public class GuildMessageReactionAddListener extends ListenerAdapter {
                     content = embed.getDescription();
                 }
 
-                event.getGuild().getTextChannelById("947588938284027914").sendMessage(new Embed("⛏ **|** History",
-                        Utils.PREFIX + "Datum: "
+                new Embed("⛏ **|** History", Utils.PREFIX + "Datum: "
                                 + new SimpleDateFormat().format(new Date(botMessage.getTimeCreated().toInstant().getEpochSecond() * 1000))
-                                + "\n\n" + content,
-                        Color.decode("#6c63cd")).build()).queue();
+                                + "\n\n" + content, Color.decode("#6c63cd"))
+                        .send(event.getGuild().getTextChannelById("947588938284027914"));
 
                 botMessage.delete().queue();
             }
