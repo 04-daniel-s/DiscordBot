@@ -8,6 +8,7 @@ import de.lecuutex.discordbot.commands.manager.DefaultCommand;
 import de.lecuutex.discordbot.utils.audio.AudioPlayerSendHandler;
 import de.lecuutex.discordbot.utils.audio.AudioResultHandler;
 import de.lecuutex.discordbot.utils.audio.TrackScheduler;
+import net.dv8tion.jda.api.audio.hooks.ConnectionStatus;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
@@ -17,6 +18,9 @@ import net.dv8tion.jda.api.managers.AudioManager;
  */
 
 public class PlayCommand extends DefaultCommand {
+
+    private TrackScheduler trackScheduler = null;
+
     @Override
     public void execute(SlashCommandEvent event) {
         String url = event.getOption("link").getAsString();
@@ -27,18 +31,25 @@ public class PlayCommand extends DefaultCommand {
         }
 
         AudioManager audioManager = getGuild().getAudioManager();
-        AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
-        AudioSourceManagers.registerRemoteSources(playerManager);
 
-        AudioPlayer player = playerManager.createPlayer();
-        TrackScheduler trackScheduler = new TrackScheduler(getGuild());
-        player.addListener(trackScheduler);
+        if (audioManager.getConnectionStatus() != ConnectionStatus.CONNECTED) {
+            AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
+            AudioSourceManagers.registerRemoteSources(playerManager);
 
-        AudioPlayerSendHandler handler = new AudioPlayerSendHandler(player);
-        playerManager.loadItem(url, new AudioResultHandler(player));
-        audioManager.setSendingHandler(handler);
+            AudioPlayer player = playerManager.createPlayer();
+            trackScheduler = new TrackScheduler(getGuild(), playerManager);
+            trackScheduler.queue(url);
+            player.addListener(trackScheduler);
 
-        audioManager.openAudioConnection(voiceChannel);
+            AudioPlayerSendHandler handler = new AudioPlayerSendHandler(player);
+            playerManager.loadItem(url, new AudioResultHandler(player));
+            audioManager.setSendingHandler(handler);
+
+            audioManager.openAudioConnection(voiceChannel);
+            return;
+        }
+
+        trackScheduler.queue(url);
     }
 
     @Override
