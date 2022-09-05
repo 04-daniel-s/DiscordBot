@@ -43,7 +43,7 @@ public class PlayCommand extends DefaultCommand {
         playerManager.loadItem(url, new AudioResultHandler(player));
 
         AudioManager audioManager = getGuild().getAudioManager();
-        /* audioManager.setSendingHandler(new AudioPlayerSendHandler(player));*/
+        audioManager.setSendingHandler(new AudioPlayerSendHandler(player));
 
         audioManager.openAudioConnection(voiceChannel);
     }
