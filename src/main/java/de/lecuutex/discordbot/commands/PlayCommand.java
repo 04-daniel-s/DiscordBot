@@ -31,19 +31,19 @@ public class PlayCommand extends DefaultCommand {
         if (voiceChannel == null) return;
 
         AudioManager audioManager = getGuild().getAudioManager();
-
         AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
+
         AudioSourceManagers.registerRemoteSources(playerManager);
         AudioPlayer player = playerManager.createPlayer();
 
-        AudioPlayerSendHandler handler = new AudioPlayerSendHandler(player);
         AudioResultHandler audioResultHandler = new AudioResultHandler(player);
-        audioManager.setSendingHandler(handler);
+        audioManager.setSendingHandler(new AudioPlayerSendHandler(player));
+
+        playerManager.loadItem(url, audioResultHandler);
 
         TrackScheduler trackScheduler = new TrackScheduler(getGuild(), playerManager, audioResultHandler);
         player.addListener(trackScheduler);
 
-        playerManager.loadItem(url, audioResultHandler);
         audioManager.openAudioConnection(voiceChannel);
     }
 
