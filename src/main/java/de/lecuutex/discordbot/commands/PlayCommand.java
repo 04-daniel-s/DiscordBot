@@ -33,17 +33,18 @@ public class PlayCommand extends DefaultCommand {
 
         if (voiceChannel == null) return;
 
-        AudioManager audioManager = getGuild().getAudioManager();
         AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
         AudioSourceManagers.registerRemoteSources(playerManager);
-
         AudioPlayer player = playerManager.createPlayer();
+
         TrackScheduler trackScheduler = new TrackScheduler();
         player.addListener(trackScheduler);
 
-        audioManager.setSendingHandler(new AudioPlayerSendHandler(player));
-
         playerManager.loadItem(url, new AudioResultHandler(player));
+
+        AudioManager audioManager = getGuild().getAudioManager();
+        /* audioManager.setSendingHandler(new AudioPlayerSendHandler(player));*/
+
         audioManager.openAudioConnection(voiceChannel);
     }
 
