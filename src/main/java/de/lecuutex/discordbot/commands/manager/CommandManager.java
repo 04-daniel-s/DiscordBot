@@ -67,24 +67,20 @@ public class CommandManager extends ListenerAdapter {
 
     @Override
     public void onSlashCommand(SlashCommandEvent event) {
-        try {
-            for (DefaultCommand command : listener) {
-                if (!event.getName().equals(command.getCommand())) continue;
-                command.setValues(event);
+        for (DefaultCommand command : listener) {
+            if (!event.getName().equals(command.getCommand())) continue;
+            command.setValues(event);
 
-                if (!command.hasPermission(Permission.ADMINISTRATOR) && command.isAdminCommand()) {
-                    command.replyError(event, Errors.INSUFFICIENT_PERMISSIONS.getError());
-                    continue;
-                }
-
-                command.execute(event);
-
-                if (!command.isReplied()) {
-                    event.reply("").complete().deleteOriginal().queue();
-                }
+            if (!command.hasPermission(Permission.ADMINISTRATOR) && command.isAdminCommand()) {
+                command.replyError(event, Errors.INSUFFICIENT_PERMISSIONS.getError());
+                continue;
             }
-        } catch (Exception e) {
-            new Embed("Exception", e.getMessage(),0,0,0).send(Utils.LOG_CHANNEL);
+
+            command.execute(event);
+
+            if (!command.isReplied()) {
+                event.reply("").complete().deleteOriginal().queue();
+            }
         }
     }
 
