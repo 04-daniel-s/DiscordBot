@@ -4,6 +4,7 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import de.lecuutex.discordbot.commands.manager.DefaultCommand;
 import de.lecuutex.discordbot.utils.audio.AudioPlayerSendHandler;
 import de.lecuutex.discordbot.utils.audio.AudioResultHandler;
@@ -37,13 +38,12 @@ public class PlayCommand extends DefaultCommand {
 
         AudioPlayerSendHandler handler = new AudioPlayerSendHandler(player);
         AudioResultHandler audioResultHandler = new AudioResultHandler(player);
-
-        playerManager.loadItem(url, audioResultHandler);
         audioManager.setSendingHandler(handler);
 
         TrackScheduler trackScheduler = new TrackScheduler(getGuild(), playerManager, audioResultHandler);
         player.addListener(trackScheduler);
 
+        playerManager.loadItem(url, audioResultHandler);
         audioManager.openAudioConnection(voiceChannel);
     }
 
