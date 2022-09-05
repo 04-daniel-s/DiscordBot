@@ -25,9 +25,12 @@ public class TrackScheduler extends AudioEventAdapter {
 
     private final AudioPlayerManager audioPlayerManager;
 
-    public TrackScheduler(Guild guild, AudioPlayerManager audioPlayerManager) {
+    private final AudioResultHandler audioResultHandler;
+
+    public TrackScheduler(Guild guild, AudioPlayerManager audioPlayerManager, AudioResultHandler audioResultHandler) {
         this.guild = guild;
         this.audioPlayerManager = audioPlayerManager;
+        this.audioResultHandler = audioResultHandler;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class TrackScheduler extends AudioEventAdapter {
         }
 
         audioPlayerManager.loadItem(queue.get(0), new AudioResultHandler(player));
-       // new Embed("Test", "End", 0, 0, 0).send(Utils.LOG_CHANNEL);
+        // new Embed("Test", "End", 0, 0, 0).send(Utils.LOG_CHANNEL);
     }
 
     public void queue(String url) {
