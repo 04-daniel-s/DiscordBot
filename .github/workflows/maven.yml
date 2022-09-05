@@ -36,11 +36,11 @@ jobs:
     - name: Executing SSH
       uses: appleboy/ssh-action@master
       with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd /home/
-            chmod 777 ./restart.sh
-            ./restart.sh
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /home/
+          chmod 777 ./restart.sh
+          ./restart.sh
