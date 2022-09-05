@@ -47,14 +47,13 @@ public class BotManager {
         return musicManager;
     }
 
-    public void loadAndPlay(final TextChannel channel, final String trackUrl) {
+    public void loadAndPlay(TextChannel channel, VoiceChannel voiceChannel, String trackUrl) {
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
-
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
                 channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
-                play(channel.getGuild(), musicManager, track);
+                play(channel.getGuild(), musicManager, track, voiceChannel);
             }
 
             @Override
@@ -67,7 +66,7 @@ public class BotManager {
 
                 channel.sendMessage("Adding to queue " + firstTrack.getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();
 
-                play(channel.getGuild(), musicManager, firstTrack);
+                play(channel.getGuild(), musicManager, firstTrack, voiceChannel);
             }
 
             @Override
@@ -82,8 +81,8 @@ public class BotManager {
         });
     }
 
-    private void play(Guild guild, GuildMusicManager musicManager, AudioTrack track) {
-        connectToFirstVoiceChannel(guild.getAudioManager());
+    private void play(Guild guild, GuildMusicManager musicManager, AudioTrack track, VoiceChannel voiceChannel) {
+        guild.getAudioManager().openAudioConnection(voiceChannel);
         musicManager.scheduler.queue(track);
     }
 
@@ -92,14 +91,4 @@ public class BotManager {
         musicManager.scheduler.nextTrack();
         channel.sendMessage("Skipped to next track.").queue();
     }
-
-    private static void connectToFirstVoiceChannel(AudioManager audioManager) {
-        if (!audioManager.isConnected() && !audioManager.isAttemptingToConnect()) {
-            for (VoiceChannel voiceChannel : audioManager.getGuild().getVoiceChannels()) {
-                audioManager.openAudioConnection(voiceChannel);
-                break;
-            }
-        }
-    }
-
 }
