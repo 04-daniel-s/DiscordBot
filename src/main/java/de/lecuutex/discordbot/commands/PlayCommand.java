@@ -30,6 +30,8 @@ public class PlayCommand extends DefaultCommand {
             voiceChannel = (VoiceChannel) event.getOption("channel").getAsGuildChannel();
         }
 
+        if(voiceChannel == null) return;
+
         AudioManager audioManager = getGuild().getAudioManager();
 
         if (audioManager.getConnectionStatus() != ConnectionStatus.CONNECTED) {
