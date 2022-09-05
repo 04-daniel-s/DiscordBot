@@ -35,37 +35,14 @@ public class PlayCommand extends DefaultCommand {
 
         AudioManager audioManager = getGuild().getAudioManager();
         AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
-
         AudioSourceManagers.registerRemoteSources(playerManager);
+
         AudioPlayer player = playerManager.createPlayer();
-
-        AudioResultHandler audioResultHandler = new AudioResultHandler(player);
-        audioManager.setSendingHandler(new AudioPlayerSendHandler(player));
-
-        playerManager.loadItem(url, new AudioLoadResultHandler() {
-            @Override
-            public void trackLoaded(AudioTrack track) {
-                player.playTrack(track);
-            }
-
-            @Override
-            public void playlistLoaded(AudioPlaylist playlist) {
-
-            }
-
-            @Override
-            public void noMatches() {
-
-            }
-
-            @Override
-            public void loadFailed(FriendlyException exception) {
-
-            }
-        });
-
         TrackScheduler trackScheduler = new TrackScheduler();
         player.addListener(trackScheduler);
+
+        audioManager.setSendingHandler(new AudioPlayerSendHandler(player));
+        playerManager.loadItem(url, new AudioResultHandler(player));
 
         audioManager.openAudioConnection(voiceChannel);
     }
