@@ -39,7 +39,7 @@ public class MessageReceiveListener extends ListenerAdapter {
                 return;
             }
 
-            Message messageEmbed = new Embed("⛏ TODO", message.getContentRaw(), Color.decode("#f6b93b")).send(channel);
+            Message messageEmbed = new Embed("⛏ **|** TODO", message.getContentRaw(), Color.decode("#f6b93b")).send(channel);
             messageEmbed.addReaction("✅").queue();
             message.delete().queue();
         }

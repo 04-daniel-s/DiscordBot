@@ -3,6 +3,7 @@ package de.lecuutex.discordbot;
 import de.lecuutex.discordbot.listener.manager.ListenerManager;
 import de.lecuutex.discordbot.utils.MySQL;
 import de.lecuutex.discordbot.utils.Utils;
+import de.lecuutex.discordbot.utils.embeds.Embed;
 import lombok.Getter;
 import lombok.Setter;
 import net.dv8tion.jda.api.JDA;
@@ -15,6 +16,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
+import java.awt.*;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -53,6 +55,8 @@ public class DiscordBot {
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
+
+        new Embed("", ":green_circle: Der Bot startet", Color.decode("#2ecc71")).send(Utils.LOG_CHANNEL);
         return jda;
     }
 

@@ -26,7 +26,7 @@ public class MessageDeleteListener extends ListenerAdapter {
         
         if (author.equals("error") || author.equals("Elefant#7353")) return;
 
-        new Embed("📬 Gelöschte Nachricht",
+        new Embed("📬 **|** Gelöschte Nachricht",
                 Utils.PREFIX + "Nutzer: `" + author + "`\n\n" + message, Color.decode("#b71540"))
                 .setThumbnail(url)
                 .setFooter(Utils.getAmountOfBadWords(message) + " Punkte")

@@ -21,7 +21,7 @@ public class MessageUpdateListener extends ListenerAdapter {
         Message message = event.getMessage();
         if (message.getAuthor().getAsTag().equals("Elefant#7353")) return;
 
-        new Embed("📬 Änderung",
+        new Embed("📬 **|** Änderung",
                 Utils.PREFIX + "Nutzer: " + message.getAuthor().getAsTag() + "\n\n", Color.decode("#b71540"))
                 .addField("Vorher", MySQL.getMessage(message.getId()) + "\n\n")
                 .addField("Nachher", message.getContentRaw())
