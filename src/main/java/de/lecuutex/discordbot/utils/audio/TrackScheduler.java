@@ -40,6 +40,7 @@ public class TrackScheduler extends AudioEventAdapter {
         if (queue.size() == 0) {
             AudioManager audioManager = guild.getAudioManager();
             audioManager.closeAudioConnection();
+            return;
         }
 
         audioPlayerManager.loadItem(queue.get(0), new AudioResultHandler(player));
