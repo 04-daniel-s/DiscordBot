@@ -15,7 +15,6 @@ import java.awt.*;
  */
 
 public class MessageUpdateListener extends ListenerAdapter {
-    //TODO: Embed -> Ban button
 
     @Override
     public void onMessageUpdate(MessageUpdateEvent event) {
@@ -26,7 +25,10 @@ public class MessageUpdateListener extends ListenerAdapter {
                 Utils.PREFIX + "Nutzer: " + message.getAuthor().getAsTag() + "\n\n", Color.decode("#b71540"))
                 .addField("Vorher", MySQL.getMessage(message.getId()) + "\n\n")
                 .addField("Nachher", message.getContentRaw())
-                .setThumbnail(message.getAuthor().getAvatarUrl()).send(Utils.TEST_CHANNEL, "punish", "🔴 Punish!");
+                .setThumbnail(message.getAuthor().getAvatarUrl())
+                .setFooter(Utils.getAmountOfBadWords(message.getContentRaw()) + " Punkte")
+                .send(Utils.TEST_CHANNEL, "punish", "🔴 Punish!");
+
         MySQL.storeMessage(message);
     }
 }
