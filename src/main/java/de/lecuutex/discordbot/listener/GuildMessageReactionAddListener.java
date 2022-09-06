@@ -23,15 +23,12 @@ public class GuildMessageReactionAddListener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
-        System.out.println(1);
+        new Embed("test","test",0,0,0).send(Utils.LOG_CHANNEL);
         if (event.getChannel().getId().equals("940634940591202314")) {
             User user = event.getUser();
-            System.out.println(2);
             if (!user.getId().equals(Utils.DANIEL_ID) && !user.isBot()) {
                 event.getReaction().removeReaction().queue();
-                System.out.println(3);
             } else if (event.getReactionEmote().getName().equals("✅") && user.getId().equals(Utils.DANIEL_ID)) {
-                System.out.println(4);
                 Message botMessage = event.getReaction().getTextChannel().retrieveMessageById(event.getMessageId()).complete();
                 String content = botMessage.getEmbeds().get(0).getDescription();
 
