@@ -19,7 +19,6 @@ public class ListenerManager {
         jda.addEventListener(new UserJoinListener());
         jda.addEventListener(new UserLeaveListener());
         jda.addEventListener(new GuildMessageReactionAddListener());
-        jda.addEventListener(new Test());
         jda.addEventListener(new ButtonClickListener());
         jda.addEventListener(commandManager);
     }
