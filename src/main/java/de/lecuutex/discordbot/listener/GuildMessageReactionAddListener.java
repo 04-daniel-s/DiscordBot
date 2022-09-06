@@ -23,7 +23,7 @@ import java.util.Date;
 public class GuildMessageReactionAddListener extends ListenerAdapter {
 
     @Override
-    public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
+    public void onMessageReactionAdd(MessageReactionAddEvent event) {
         new Embed("test","test",0,0,0).send(Utils.LOG_CHANNEL);
         if (event.getChannel().getId().equals("940634940591202314")) {
             User user = event.getUser();
